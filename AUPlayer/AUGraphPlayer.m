@@ -74,11 +74,14 @@
     // 对Graph 添加 Node
     status = AUGraphAddNode(mPlayerGraph, &ioDescription, &mPlayerIONode);
     CheckStatus(status, @"Could not add I/O node to AUGraph", YES);
+    
     //2-2:添加PlayerNode
     AudioComponentDescription playerDescription;
     bzero(&playerDescription, sizeof(playerDescription));
     playerDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    
     playerDescription.componentType = kAudioUnitType_Generator;
+    
     playerDescription.componentSubType = kAudioUnitSubType_AudioFilePlayer;
     status = AUGraphAddNode(mPlayerGraph, &playerDescription, &mPlayerNode);
     CheckStatus(status, @"Could not add Player node to AUGraph", YES);

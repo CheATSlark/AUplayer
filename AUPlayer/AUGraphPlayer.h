@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(id)initWithFilePath:(NSString *)path;
 
+- (BOOL)play;
+
+- (void)stop;
+
+- (void) setInputSource:(BOOL) isAcc;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -66,9 +66,9 @@
     bzero(&ioDescription, sizeof(ioDescription));
     // 厂商苹果
     ioDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-    // 组成类型
+    // 组成类型  输出单元
     ioDescription.componentType = kAudioUnitType_Output;
-    // 组成子类型
+    // 组成子类型  可以当作输入 也可以当作输出
     ioDescription.componentSubType = kAudioUnitSubType_RemoteIO;
     
     // 对Graph 添加 Node
@@ -79,34 +79,44 @@
     AudioComponentDescription playerDescription;
     bzero(&playerDescription, sizeof(playerDescription));
     playerDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-    
+    // 没有音频输入、只有音频输出
     playerDescription.componentType = kAudioUnitType_Generator;
-    
+    // 播放文件
     playerDescription.componentSubType = kAudioUnitSubType_AudioFilePlayer;
+    
     status = AUGraphAddNode(mPlayerGraph, &playerDescription, &mPlayerNode);
     CheckStatus(status, @"Could not add Player node to AUGraph", YES);
+    
     //2-3:添加Splitter
     AudioComponentDescription splitterDescription;
     bzero(&splitterDescription, sizeof(splitterDescription));
     splitterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    //可以把输入格式 转换成 输出格式
     splitterDescription.componentType = kAudioUnitType_FormatConverter;
+    
     splitterDescription.componentSubType = kAudioUnitSubType_Splitter;
+    
     status = AUGraphAddNode(mPlayerGraph, &splitterDescription, &mSplitterNode);
     CheckStatus(status, @"Could not add Splitter node to AUGraph", YES);
+    
     //2-4:添加两个Mixer
     AudioComponentDescription mixerDescription;
     bzero(&mixerDescription, sizeof(mixerDescription));
     mixerDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    // 把多个输入 混合在一个，当作一个或者多个输出
     mixerDescription.componentType = kAudioUnitType_Mixer;
     mixerDescription.componentSubType = kAudioUnitSubType_MultiChannelMixer;
     status = AUGraphAddNode(mPlayerGraph, &mixerDescription, &mVocalMixerNode);
     CheckStatus(status, @"Could not add VocalMixer node to AUGraph", YES);
+    
     status = AUGraphAddNode(mPlayerGraph, &mixerDescription, &mAccMixerNode);
     CheckStatus(status, @"Could not add AccMixer node to AUGraph", YES);
     
     //3:打开Graph, 只有真正的打开了Graph才会实例化每一个Node
     status = AUGraphOpen(mPlayerGraph);
     CheckStatus(status, @"Could not open AUGraph", YES);
+    
+    
     //4-1:获取出IONode的AudioUnit
     status = AUGraphNodeInfo(mPlayerGraph, mPlayerIONode, NULL, &mPlayerIOUnit);
     CheckStatus(status, @"Could not retrieve node info for I/O node", YES);
@@ -125,9 +135,13 @@
     
     //5:给AudioUnit设置参数
     AudioStreamBasicDescription stereoStreamFormat;
+    
     UInt32 bytesPerSample = sizeof(Float32);
+    
     bzero(&stereoStreamFormat, sizeof(stereoStreamFormat));
+    // PCM 格式
     stereoStreamFormat.mFormatID          = kAudioFormatLinearPCM;
+    //
     stereoStreamFormat.mFormatFlags       = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
     stereoStreamFormat.mBytesPerPacket    = bytesPerSample;
     stereoStreamFormat.mFramesPerPacket   = 1;
@@ -135,8 +149,10 @@
     stereoStreamFormat.mChannelsPerFrame  = 2;                    // 2 indicates stereo
     stereoStreamFormat.mBitsPerChannel    = 8 * bytesPerSample;
     stereoStreamFormat.mSampleRate        = 48000.0;
+    
     status = AudioUnitSetProperty(mPlayerIOUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, &stereoStreamFormat, sizeof(stereoStreamFormat));
     CheckStatus(status, @"set remote IO output element stream format ", YES);
+    
     status = AudioUnitSetProperty(
                                   mPlayerUnit,
                                   kAudioUnitProperty_StreamFormat,
@@ -148,22 +164,29 @@
     CheckStatus(status, @"Could not Set StreamFormat for Player Unit", YES);
     
     //5-2配置Splitter的属性
+    // 1 、 0 代表 元素的1、2
     status = AudioUnitSetProperty(mSplitterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output,
                                   0, &stereoStreamFormat, sizeof(stereoStreamFormat));
     CheckStatus(status, @"Could not Set StreamFormat for Splitter Unit", YES);
+    
     status = AudioUnitSetProperty(mSplitterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
                                   0, &stereoStreamFormat, sizeof(stereoStreamFormat));
     CheckStatus(status, @"Could not Set StreamFormat for Splitter Unit", YES);
+    
     //5-3 配置VocalMixerUnit的属性
     status = AudioUnitSetProperty(mVocalMixerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output,
                                   0, &stereoStreamFormat, sizeof(stereoStreamFormat));
     CheckStatus(status, @"Could not Set StreamFormat for VocalMixer Unit", YES);
+    
     status = AudioUnitSetProperty(mVocalMixerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
                                   0, &stereoStreamFormat, sizeof(stereoStreamFormat));
     CheckStatus(status, @"Could not Set StreamFormat for VocalMixer Unit", YES);
+    
     int mixerElementCount = 1;
     status = AudioUnitSetProperty(mVocalMixerUnit, kAudioUnitProperty_ElementCount, kAudioUnitScope_Input, 0,
                                   &mixerElementCount, sizeof(mixerElementCount));
+    
+    
     //5-4 配置AccMixerUnit的属性
     status = AudioUnitSetProperty(mAccMixerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output,
                                   0, &stereoStreamFormat, sizeof(stereoStreamFormat));

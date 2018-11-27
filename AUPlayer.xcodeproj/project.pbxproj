@@ -16,6 +16,8 @@
 		52388AB721A9269A0076D7F8 /* AUGraphPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 52388AB621A9269A0076D7F8 /* AUGraphPlayer.m */; };
 		52388ABA21A9280B0076D7F8 /* ELAudioSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 52388AB921A9280B0076D7F8 /* ELAudioSession.m */; };
 		52388ABD21A93B5B0076D7F8 /* AVAudioSession+RouteUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52388ABC21A93B5B0076D7F8 /* AVAudioSession+RouteUtils.m */; };
+		523DC39521ABD10900DE075D /* 0fe2a7e9c51012210eaaa1e2b103b1b1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 523DC39321ABD10800DE075D /* 0fe2a7e9c51012210eaaa1e2b103b1b1.m4a */; };
+		523DC39621ABD10900DE075D /* MiAmor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 523DC39421ABD10900DE075D /* MiAmor.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		52388AB921A9280B0076D7F8 /* ELAudioSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELAudioSession.m; sourceTree = "<group>"; };
 		52388ABB21A93B5B0076D7F8 /* AVAudioSession+RouteUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVAudioSession+RouteUtils.h"; sourceTree = "<group>"; };
 		52388ABC21A93B5B0076D7F8 /* AVAudioSession+RouteUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVAudioSession+RouteUtils.m"; sourceTree = "<group>"; };
+		523DC39321ABD10800DE075D /* 0fe2a7e9c51012210eaaa1e2b103b1b1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0fe2a7e9c51012210eaaa1e2b103b1b1.m4a; sourceTree = "<group>"; };
+		523DC39421ABD10900DE075D /* MiAmor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MiAmor.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 		52388A9E21A9266F0076D7F8 /* AUPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				523DC39321ABD10800DE075D /* 0fe2a7e9c51012210eaaa1e2b103b1b1.m4a */,
+				523DC39421ABD10900DE075D /* MiAmor.mp3 */,
 				52388A9F21A9266F0076D7F8 /* AppDelegate.h */,
 				52388AA021A9266F0076D7F8 /* AppDelegate.m */,
 				52388AA221A9266F0076D7F8 /* ViewController.h */,
@@ -144,7 +150,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				52388AAC21A926700076D7F8 /* LaunchScreen.storyboard in Resources */,
+				523DC39621ABD10900DE075D /* MiAmor.mp3 in Resources */,
 				52388AA921A926700076D7F8 /* Assets.xcassets in Resources */,
+				523DC39521ABD10900DE075D /* 0fe2a7e9c51012210eaaa1e2b103b1b1.m4a in Resources */,
 				52388AA721A9266F0076D7F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,7 +312,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U36WCMBNDB;
 				INFOPLIST_FILE = AUPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,7 +330,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U36WCMBNDB;
 				INFOPLIST_FILE = AUPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

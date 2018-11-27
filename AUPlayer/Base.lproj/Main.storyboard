@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,11 +13,54 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRG-2I-lHo">
+                                <rect key="frame" x="127.5" y="80" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="9wL-u6-fSt"/>
+                                    <constraint firstAttribute="height" constant="30" id="jEk-Ay-vmO"/>
+                                </constraints>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LNJ-cB-XHI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9S2-2O-IPx">
+                                <rect key="frame" x="35" y="185" width="117.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="jif-6Z-94P"/>
+                                </constraints>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z7I-Wu-nGa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgL-mJ-tx0">
+                                <rect key="frame" x="222.5" y="185" width="117.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9NH-WI-Pi1"/>
+                                </constraints>
+                                <state key="normal" title="switch"/>
+                                <connections>
+                                    <action selector="switch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y7x-6a-q5P"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qgL-mJ-tx0" firstAttribute="width" secondItem="9S2-2O-IPx" secondAttribute="width" id="23C-qf-y9d"/>
+                            <constraint firstItem="fRG-2I-lHo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="8zc-uK-b76"/>
+                            <constraint firstItem="qgL-mJ-tx0" firstAttribute="centerY" secondItem="9S2-2O-IPx" secondAttribute="centerY" id="Jwi-34-f4A"/>
+                            <constraint firstItem="9S2-2O-IPx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="KiT-cy-FXM"/>
+                            <constraint firstItem="9S2-2O-IPx" firstAttribute="top" secondItem="fRG-2I-lHo" secondAttribute="bottom" constant="75" id="Tdp-VE-tvR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qgL-mJ-tx0" secondAttribute="trailing" constant="35" id="go6-dh-8Hc"/>
+                            <constraint firstItem="fRG-2I-lHo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pL5-jV-Qpq"/>
+                            <constraint firstItem="qgL-mJ-tx0" firstAttribute="leading" secondItem="9S2-2O-IPx" secondAttribute="trailing" constant="70" id="rVv-QJ-fGv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

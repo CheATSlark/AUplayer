@@ -48,8 +48,10 @@ const NSTimeInterval AUSAudioSessionLatency_LowLatency = 0.0058;
          NSLog(@"Error when setting sample rate on audio session: %@", error.localizedDescription);
     }
     
-    if(![self.audioSession setActive:_active error:&error])
+    if(![self.audioSession setActive:_active error:&error]){
         NSLog(@"Error when setting active state of audio session: %@", error.localizedDescription);
+    }
+    
     
     _currentSampleRate = [self.audioSession sampleRate];
 }
@@ -58,8 +60,9 @@ const NSTimeInterval AUSAudioSessionLatency_LowLatency = 0.0058;
     _preferredLatency = preferredLatency;
     
     NSError *error = nil;
-    if(![self.audioSession setPreferredIOBufferDuration:_preferredLatency error:&error])
+    if(![self.audioSession setPreferredIOBufferDuration:_preferredLatency error:&error]){\
         NSLog(@"Error when setting preferred I/O buffer duration");
+    }
 }
 
 -(void)addRouteChangeListener{
@@ -83,7 +86,7 @@ const NSTimeInterval AUSAudioSessionLatency_LowLatency = 0.0058;
         if ([[AVAudioSession sharedInstance] usingWiredMicrophone]) {
         } else {
             if (![[AVAudioSession sharedInstance] usingBlueTooth]) {
-                [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+//               [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
             }
         }
     }
